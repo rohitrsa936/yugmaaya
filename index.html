@@ -1,0 +1,1687 @@
+<!doctype html>
+<html class="dark scroll-smooth" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>YUGMAAYA | SOFTWARES</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="icon" type="image/png" href="/Assets/images/Yugmaaya_logo.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Outfit:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#ffffff",
+              "matte-black": "#0A0A0A",
+              "matte-card": "#121212",
+              "accent-neon": "#22d3ee",
+              "accent-silver": "#E5E7EB",
+              "border-silver": "rgba(255,255,255,0.15)",
+            },
+            fontFamily: {
+              display: ["Inter", "system-ui", "sans-serif"],
+              sans: ["Inter", "system-ui", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+    <style type="text/tailwindcss">
+      @layer base {
+        body {
+          @apply bg-black text-slate-800;
+
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+
+          background-size: 300px 300px;
+        }
+      }
+
+      .silver-gradient-btn {
+        background: linear-gradient(135deg, #ffffff 0%, #a1a1a1 100%);
+        color: #000;
+        border: none;
+        cursor: pointer;
+      }
+
+      .white-bleed {
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+      }
+      @layer components {
+        .neon-bleed {
+          text-shadow:
+            0 0 15px rgba(34, 211, 238, 0.4),
+            0 0 30px rgba(34, 211, 238, 0.2);
+        }
+        .white-bleed {
+          text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+        .matte-glass {
+          @apply bg-matte-card/80 backdrop-blur-xl border border-border-silver;
+        }
+        .razor-border {
+          @apply border border-white/10 hover:border-accent-neon/40 transition-colors duration-500;
+          box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.02);
+        }
+        .custom-cursor {
+          @apply fixed pointer-events-none z-[999] w-8 h-8 border border-white rounded-full mix-blend-difference transition-transform duration-300 ease-out flex items-center justify-center;
+          transform: translate(-50%, -50%);
+        }
+        .liquid-btn-white {
+          @apply relative overflow-hidden bg-white text-black font-black transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,255,255,0.3)];
+        }
+        .silver-gradient-btn {
+          background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+          @apply text-black font-black transition-all duration-300;
+        }
+        .bento-glow-card {
+          @apply relative p-8 rounded-3xl bg-matte-card razor-border overflow-hidden transition-all duration-500 hover:-translate-y-2;
+        }
+        .selective-glow {
+          filter: drop-shadow(0 0 15px rgba(34, 211, 238, 0.3));
+        }
+        .scanning-line {
+          @apply absolute w-full h-[1px] bg-white/5 top-0 left-0 pointer-events-none;
+          animation: scan 8s linear infinite;
+        }
+        @keyframes scan {
+          0% {
+            transform: translateY(0);
+          }
+          100% {
+            transform: translateY(100vh);
+          }
+        }
+        .reveal {
+          @apply opacity-0 translate-y-10 transition-all duration-1000;
+        }
+        .reveal-active {
+          @apply opacity-100 translate-y-0;
+        }
+      }
+
+      /* Blue Underline Hover Effect */
+      .nav-link {
+        @apply text-[12px] font-bold uppercase tracking-widest text-slate-400 hover:text-white transition-colors relative py-1;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: #3b82f6; /* Modern Blue */
+        transition: width 0.3s ease-in-out;
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      /* Scrolled State: Snap to top, remove border-radius, full width */
+      header.is-scrolled {
+        top: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        border-radius: 0 !important;
+        border-left: none;
+        border-right: none;
+        border-top: none;
+      }
+
+      @keyframes marquee {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          /* This must be -50% for a seamless transition */
+          transform: translateX(-50%);
+        }
+      }
+
+      .animate-marquee {
+        display: flex;
+        /* Adjust '30s' to make it faster or slower */
+        animation: marquee 40s linear infinite;
+        will-change: transform;
+      }
+
+      /* Stops the scroll when the user hovers over an icon */
+      .group:hover .animate-marquee {
+        animation-play-state: paused;
+      }
+
+      @media (max-width: 768px) {
+        .animate-marquee {
+          animation-duration: 50s; /* Slower on mobile for better visibility */
+          gap: 2rem;
+        }
+      }
+
+      .focus-card {
+        @apply px-5 py-4 rounded-2xl text-sm font-semibold text-white
+             bg-white/5 border border-white/10 backdrop-blur
+             hover:bg-white/10 transition;
+      }
+
+      .service-card {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.04),
+          rgba(255, 255, 255, 0.01)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 1.75rem;
+        padding: 2.5rem 2rem;
+        backdrop-filter: blur(12px);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .service-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          400px circle at var(--x, 50%) var(--y, 50%),
+          rgba(0, 255, 200, 0.15),
+          transparent 40%
+        );
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      .service-card:hover::before {
+        opacity: 1;
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+        border-color: rgba(0, 255, 200, 0.3);
+      }
+
+      .service-icon {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 1.5rem;
+        filter: drop-shadow(0 0 12px rgba(0, 255, 200, 0.25));
+      }
+
+      .service-title {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: white;
+        margin-bottom: 0.75rem;
+      }
+
+      .service-desc {
+        color: #94a3b8;
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+    </style>
+  </head>
+  <body class="font-sans overflow-x-hidden">
+    <div class="custom-cursor hidden lg:flex"></div>
+    <div class="scanning-line"></div>
+
+    <header
+      id="main-header"
+      class="fixed top-6 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-[100] border border-white/10 bg-black/80 backdrop-blur-md rounded-2xl transition-all duration-500 ease-in-out"
+    >
+      <nav class="px-4 sm:px-6 h-20 flex items-center justify-between">
+        <!-- Logo -->
+        <a class="flex items-center gap-3 sm:gap-4 group" href="#home">
+          <img
+            src="/Assets/images/Yugmaaya_logo.png"
+            alt="Yugmaaya Logo"
+            class="h-10 sm:h-12 w-auto group-hover:scale-110 transition-transform duration-500"
+          />
+          <span
+            class="tracking-[0.15em] text-white text-sm sm:text-lg font-bold"
+            style="font-family: Arial, Helvetica, sans-serif"
+          >
+            YUGMAAYA
+          </span>
+        </a>
+
+        <!-- Navigation (desktop) -->
+        <div class="hidden lg:flex items-center gap-6 sm:gap-8">
+          <a href="#home" class="nav-link">Home</a>
+          <a href="#about" class="nav-link">About Us</a>
+          <a href="#service" class="nav-link">Services</a>
+          <a href="#feature" class="nav-link">Features</a>
+          <a href="#price" class="nav-link">Price</a>
+        </div>
+
+        <!-- Mobile Hamburger Button -->
+        <button
+          id="mobile-menu-toggle"
+          class="lg:hidden flex items-center justify-center w-10 h-10 rounded-full bg-white/10 text-white hover:bg-white/20 transition-all"
+        >
+          <span class="sr-only">Toggle menu</span>
+          <!-- Hamburger icon -->
+          <div class="space-y-1.5">
+            <span class="block w-6 h-0.5 bg-white"></span>
+            <span class="block w-6 h-0.5 bg-white"></span>
+            <span class="block w-6 h-0.5 bg-white"></span>
+          </div>
+        </button>
+
+        <!-- Get Started Button (desktop & mobile) -->
+        <button
+          type="button"
+          class="hidden lg:inline-block px-6 py-2.5 rounded-full silver-gradient-btn text-xs sm:text-[10px] font-bold uppercase tracking-[0.2em] hover:scale-105 active:scale-95 transition-all shadow-lg shadow-white/5"
+        >
+          Get Started
+        </button>
+      </nav>
+
+      <!-- Mobile Navigation Panel -->
+      <div
+        id="mobile-menu"
+        class="lg:hidden absolute top-full left-0 w-full bg-black/90 backdrop-blur-md border-t border-white/10 rounded-b-2xl overflow-hidden max-h-0 transition-all duration-500 ease-in-out"
+      >
+        <div class="flex flex-col items-center gap-4 py-4">
+          <a href="#home" class="nav-link">Home</a>
+          <a href="#about" class="nav-link">About Us</a>
+          <a href="#service" class="nav-link">Services</a>
+          <a href="#feature" class="nav-link">Features</a>
+          <a href="#price" class="nav-link">Price</a>
+          <button
+            type="button"
+            class="px-10 py-2 rounded-full silver-gradient-btn text-sm font-bold uppercase tracking-[0.2em] hover:scale-105 active:scale-95 transition-all shadow-lg shadow-white/5"
+          >
+            Get Started
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section
+        class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-cover bg-center bg-no-repeat"
+        style="background-image: url(&quot;/Assets/images/bg-main.png&quot;)"
+      >
+        <!-- Dark overlay for text readability -->
+        <div class="absolute inset-0 bg-black/40"></div>
+
+        <!-- Decorative blurred circles -->
+        <div class="absolute inset-0 pointer-events-none opacity-30">
+          <div
+            class="absolute top-1/4 left-[10%] w-40 h-40 md:w-64 md:h-64 bg-accent-neon/10 rounded-full blur-[80px] md:blur-[120px]"
+          ></div>
+          <div
+            class="absolute bottom-1/4 right-[10%] w-56 h-56 md:w-80 md:h-80 bg-white/5 rounded-full blur-[100px] md:blur-[150px]"
+          ></div>
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center">
+          <!-- Badge / tagline -->
+          <div
+            class="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-1 sm:py-2 mb-8 sm:mb-12 rounded-full border border-white/10 bg-white/5 text-[8px] sm:text-[10px] font-black tracking-widest uppercase text-white font-[Arial]"
+          >
+            <span class="relative flex h-2 w-2">
+              <span
+                class="absolute inline-flex h-full w-full rounded-full bg-white opacity-75 animate-ping"
+              ></span>
+              <span
+                class="relative inline-flex h-2 w-2 rounded-full bg-white"
+              ></span>
+            </span>
+            Transforming Vision into Reality 2.0
+          </div>
+
+          <!-- Main heading -->
+          <h1
+            class="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-black font-display leading-[1.1] md:leading-[0.9] tracking-[0.35em] mb-6 sm:mb-10 text-white uppercase"
+          >
+            <span
+              class="block mb-2 sm:mb-4 white-bleed"
+              style="
+                font-family:
+                  &quot;Lucida Console&quot;, &quot;Courier New&quot;, monospace;
+              "
+              >YUGMAAYA</span
+            >
+          </h1>
+
+          <!-- Subheading with neon effect -->
+          <p
+            class="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 text-accent-neon neon-bleed"
+          >
+            We Build <span class="text-white">Modern Software</span> Solutions
+          </p>
+
+          <!-- Description -->
+          <p
+            class="text-sm sm:text-base md:text-lg text-slate-400 max-w-md sm:max-w-xl md:max-w-2xl mx-auto mb-8 sm:mb-16 font-sans leading-relaxed"
+          >
+            High-quality websites, mobile apps, e-sport games & software
+            solutions to grow your business digitally.
+          </p>
+
+          <!-- Buttons -->
+          <div
+            class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
+          >
+            <button
+              class="liquid-btn-white w-full sm:w-auto px-8 sm:px-12 py-3 sm:py-5 rounded-full text-sm sm:text-base uppercase tracking-widest transition-all hover:scale-105"
+            >
+              Get Started
+            </button>
+            <button
+              class="w-full sm:w-auto px-8 sm:px-12 py-3 sm:py-5 border border-white/20 rounded-full font-black text-sm sm:text-base text-white uppercase tracking-widest hover:bg-white/10 transition-all"
+            >
+              Contact Us
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="about"
+        class="relative bg-black py-28 md:py-36 overflow-hidden"
+      >
+        <!-- Ambient background glow -->
+        <div class="absolute inset-0 pointer-events-none">
+          <div
+            class="absolute top-1/4 left-1/3 w-[500px] h-[500px] bg-accent-neon/10 blur-[200px] rounded-full"
+          ></div>
+          <div
+            class="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-white/5 blur-[180px] rounded-full"
+          ></div>
+        </div>
+
+        <div
+          class="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center"
+        >
+          <!-- LEFT CONTENT -->
+          <div>
+            <span
+              class="inline-block mb-6 text-[11px] tracking-[0.4em] uppercase text-slate-500 font-mono"
+            >
+              About us --
+            </span>
+
+            <h2
+              class="text-4xl sm:text-5xl md:text-7xl font-black font-display text-white leading-[1.05] mb-8"
+            >
+              Engineering<br />
+              <span class="text-accent-neon neon-bleed"
+                >Future-Ready Systems</span
+              >
+            </h2>
+
+            <p class="text-slate-400 text-lg leading-relaxed max-w-xl mb-8">
+              Yugmaaya builds scalable, resilient, and high-performance digital
+              systems for businesses operating in fast-evolving environments.
+            </p>
+
+            <p class="text-slate-500 text-base leading-relaxed max-w-xl mb-12">
+              We work at the intersection of software engineering, intelligent
+              automation, and modern architecture—delivering platforms designed
+              for long-term growth, clarity, and adaptability.
+            </p>
+
+            <!-- Focus Grid -->
+            <div class="grid grid-cols-2 gap-4 max-w-xl">
+              <div class="focus-card">Scalable Architecture</div>
+              <div class="focus-card">Performance-Driven Systems</div>
+              <div class="focus-card">AI & Automation</div>
+              <div class="focus-card">Secure Platforms</div>
+            </div>
+          </div>
+
+          <!-- RIGHT VISUAL -->
+          <div class="relative group">
+            <!-- Glass frame -->
+            <div
+              class="absolute inset-0 rounded-[2.5rem] border border-white/10 bg-white/5 backdrop-blur-xl"
+            ></div>
+
+            <!-- Image -->
+            <img
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBN8ROa3OA3QGs0sXQxUYcVRsVU77Fden1aIzpSbgHWE57O71V_UG5V9BLO8BTx0tKxKFUBVUH68FFFdEQ_2Ek0kQ4d0xvm04ZZoL8_yEcMjmu_hiQxO9xz7bgT7fZKJLjiKTK82PY-5bT6x7j_EYhsBRitSEKTbiHC7t9FSqyzTmQmkIIpQapc6w2uF3ghRYk5CEL6v17UY33JEDiKhfQBF5-GbnWmxkqW3fW9-bj9tNP1u2uJm4AroNk3bmYVMyoC8uClFNJwcIHr"
+              alt="Yugmaaya Systems Engineering"
+              class="relative w-full aspect-square rounded-[2.3rem] object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700 shadow-2xl"
+            />
+            <!-- Floating Metric -->
+            <div
+              class="absolute -bottom-6 left-6 px-6 py-4 rounded-2xl bg-black/80 border border-white/10 backdrop-blur-md text-white shadow-xl group-hover:translate-y-[-6px] transition"
+            >
+              <div class="text-2xl font-black">99.99%</div>
+              <div class="text-[10px] uppercase tracking-widest text-slate-400">
+                System Reliability
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="services"
+        class="reveal relative max-w-7xl mx-auto px-6 py-32 overflow-hidden"
+      >
+        <!-- Header -->
+        <div class="mb-20 text-center">
+          <span
+            class="inline-block mb-4 text-[11px] tracking-[0.4em] uppercase text-slate-500 font-mono"
+          >
+            Our Services
+          </span>
+
+          <h2
+            class="text-4xl sm:text-5xl md:text-6xl font-black font-display text-white mb-6 white-bleed"
+          >
+            What We <span class="text-accent-neon neon-bleed">Offer</span>
+          </h2>
+
+          <p class="text-slate-500 max-w-2xl mx-auto text-lg">
+            We design, build, and scale digital products using modern
+            engineering, clean architecture, and future-ready technologies.
+          </p>
+        </div>
+
+        <!-- Services Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Card 1 -->
+          <div class="service-card group">
+            <img src="/Assets/icons/teamwork.gif" class="service-icon" />
+            <h4 class="service-title">Web Development</h4>
+            <p class="service-desc">
+              We design responsive, high-performance websites with clean and
+              lightweight code that outperforms competitors and scales with your
+              business.
+            </p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="service-card group">
+            <img src="/Assets/icons/e-commerce.gif" class="service-icon" />
+            <h4 class="service-title">E-commerce Development</h4>
+            <p class="service-desc">
+              End-to-end ecommerce solutions that enable seamless online
+              selling, optimized performance, and scalable growth.
+            </p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="service-card group">
+            <img
+              src="/Assets/icons/smartphone-coding.gif"
+              class="service-icon"
+            />
+            <h4 class="service-title">Mobile App Development</h4>
+            <p class="service-desc">
+              Powerful Android and iOS applications engineered for reliability,
+              performance, and exceptional user experience.
+            </p>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="service-card group">
+            <img src="/Assets/icons/software.gif" class="service-icon" />
+            <h4 class="service-title">Software Development</h4>
+            <p class="service-desc">
+              Custom software solutions aligned with business objectives, built
+              using modern architectures and best engineering practices.
+            </p>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="service-card group">
+            <img src="/Assets/icons/decision-making.gif" class="service-icon" />
+            <h4 class="service-title">Game Development</h4>
+            <p class="service-desc">
+              Interactive and performance-driven game development using modern
+              engines and immersive design principles.
+            </p>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="service-card group">
+            <img src="/Assets/icons/coding.gif" class="service-icon" />
+            <h4 class="service-title">Custom AI Software</h4>
+            <p class="service-desc">
+              AI-powered software solutions designed to automate processes,
+              enhance intelligence, and deliver measurable business value.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- WHY CHOOSE US -->
+      <section class="relative py-28 bg-black overflow-hidden" id="features">
+        <!-- ambient glow -->
+        <div
+          class="absolute -top-40 -right-40 w-[500px] h-[500px] bg-accent-neon/10 blur-[160px] rounded-full"
+        ></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+          <!-- heading -->
+          <div class="text-center mb-20 reveal">
+            <h2
+              class="text-accent-neon font-mono text-sm tracking-[0.35em] uppercase mb-4"
+            >
+              Why Choose Us
+            </h2>
+            <h3
+              class="text-4xl md:text-5xl font-black text-white leading-tight"
+            >
+              Engineered for <span class="white-bleed">Excellence</span>
+            </h3>
+            <p class="text-slate-400 mt-6 max-w-2xl mx-auto text-lg">
+              We combine engineering precision, creative intelligence, and
+              disciplined execution.
+            </p>
+          </div>
+
+          <!-- cards -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- CARD -->
+            <div
+              class="group relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 transition-all duration-500 hover:-translate-y-3 hover:border-accent-neon/40"
+            >
+              <div
+                class="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-br from-accent-neon/10 via-transparent to-transparent rounded-3xl"
+              ></div>
+
+              <div class="relative z-10">
+                <div class="mb-6">
+                  <img
+                    src="/Assets/icons/quality.png"
+                    class="w-14 h-14 object-contain group-hover:scale-110 transition duration-500"
+                    alt="Expertise"
+                  />
+                </div>
+                <h4 class="text-xl font-bold text-white mb-3">Expertise</h4>
+                <p class="text-slate-400 text-sm leading-relaxed">
+                  Years of mastery in scalable systems, AI-driven solutions, and
+                  modern architectures.
+                </p>
+              </div>
+            </div>
+
+            <!-- CARD -->
+            <div
+              class="group relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 transition-all duration-500 hover:-translate-y-3 hover:border-accent-neon/40"
+            >
+              <div class="relative z-10">
+                <div class="mb-6">
+                  <img
+                    src="/Assets/icons/real-time.png"
+                    class="w-14 h-14 object-contain group-hover:rotate-6 transition duration-500"
+                    alt="On-Time Delivery"
+                  />
+                </div>
+                <h4 class="text-xl font-bold text-white mb-3">
+                  Precision Delivery
+                </h4>
+                <p class="text-slate-400 text-sm leading-relaxed">
+                  Aggressive timelines delivered with zero compromise on
+                  stability and performance.
+                </p>
+              </div>
+            </div>
+
+            <!-- CARD -->
+            <div
+              class="group relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 transition-all duration-500 hover:-translate-y-3 hover:border-accent-neon/40"
+            >
+              <div class="relative z-10">
+                <div class="mb-6">
+                  <img
+                    src="/Assets/icons/call-center.png"
+                    class="w-14 h-14 object-contain group-hover:scale-110 transition duration-500"
+                    alt="24/7 Support"
+                  />
+                </div>
+                <h4 class="text-xl font-bold text-white mb-3">24/7 Support</h4>
+                <p class="text-slate-400 text-sm leading-relaxed">
+                  Continuous monitoring, rapid issue resolution, and proactive
+                  maintenance.
+                </p>
+              </div>
+            </div>
+
+            <!-- CARD -->
+            <div
+              class="group relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 transition-all duration-500 hover:-translate-y-3 hover:border-accent-neon/40"
+            >
+              <div class="relative z-10">
+                <div class="mb-6">
+                  <img
+                    src="/Assets/icons/quality (1).png"
+                    class="w-14 h-14 object-contain group-hover:scale-110 transition duration-500"
+                    alt="Pricing"
+                  />
+                </div>
+                <h4 class="text-xl font-bold text-white mb-3">
+                  Strategic Pricing
+                </h4>
+                <p class="text-slate-400 text-sm leading-relaxed">
+                  Cost-efficient solutions designed for long-term business
+                  scalability.
+                </p>
+              </div>
+            </div>
+
+            <!-- CARD -->
+            <div
+              class="group relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 transition-all duration-500 hover:-translate-y-3 hover:border-accent-neon/40"
+            >
+              <div class="relative z-10">
+                <div class="mb-6">
+                  <img
+                    src="/Assets/icons/people.png"
+                    class="w-14 h-14 object-contain group-hover:scale-110 transition duration-500"
+                    alt="Expert Team"
+                  />
+                </div>
+                <h4 class="text-xl font-bold text-white mb-3">Elite Team</h4>
+                <p class="text-slate-400 text-sm leading-relaxed">
+                  A focused collective of engineers, designers, and problem
+                  solvers.
+                </p>
+              </div>
+            </div>
+
+            <!-- CARD -->
+            <div
+              class="group relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 transition-all duration-500 hover:-translate-y-3 hover:border-accent-neon/40"
+            >
+              <div class="relative z-10">
+                <div class="mb-6">
+                  <img
+                    src="/Assets/icons/assurance.png"
+                    class="w-14 h-14 object-contain group-hover:scale-110 transition duration-500"
+                    alt="Quality Assurance"
+                  />
+                </div>
+                <h4 class="text-xl font-bold text-white mb-3">
+                  Quality Assurance
+                </h4>
+                <p class="text-slate-400 text-sm leading-relaxed">
+                  Automated testing pipelines and human-led quality governance.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="pricing"
+        class="relative max-w-7xl mx-auto px-6 py-40 overflow-hidden"
+      >
+        <!-- subtle background blur -->
+        <div
+          class="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-cyan-500/10 blur-[160px] rounded-full"
+        ></div>
+
+        <!-- Header -->
+        <div class="relative text-center mb-24">
+          <h2
+            class="text-4xl md:text-6xl font-black tracking-tight text-white mb-6"
+          >
+            Yugmaaya Access Plans
+          </h2>
+          <p class="text-slate-400 max-w-2xl mx-auto">
+            Scalable development plans for startups, enterprises, and gaming
+            studios. Built for performance, creativity, and long-term growth.
+          </p>
+        </div>
+
+        <!-- Cards -->
+        <div class="relative grid grid-cols-1 md:grid-cols-3 gap-12">
+          <!-- STARTER -->
+          <div
+            class="group rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-10 transition-all duration-500 hover:-translate-y-3 hover:shadow-xl hover:shadow-cyan-500/10"
+          >
+            <span class="text-xs tracking-widest uppercase text-slate-400"
+              >Starter</span
+            >
+
+            <h3 class="text-5xl font-black text-white mt-4">
+              $2.5k <small class="text-base text-slate-500">/mo</small>
+            </h3>
+
+            <p class="text-slate-400 mt-4">
+              Best for early-stage startups and MVP launches.
+            </p>
+
+            <ul class="mt-8 space-y-3 text-slate-300 text-sm">
+              <li>Responsive Website / App</li>
+              <li>Unity Game Prototype</li>
+              <li>UI / UX Design Setup</li>
+              <li>Basic Cloud Deployment</li>
+              <li>Performance Optimization</li>
+              <li>Email & Chat Support</li>
+            </ul>
+
+            <div class="flex justify-between text-xs text-slate-500 mt-8">
+              <span>⏱ 2–4 Weeks</span>
+              <span>👥 2 Engineers</span>
+            </div>
+
+            <button
+              class="mt-8 w-full rounded-xl border border-white/15 py-3 text-xs tracking-widest uppercase text-white transition hover:bg-white hover:text-black"
+            >
+              Get Started
+            </button>
+          </div>
+
+          <!-- PRO -->
+          <div
+            class="relative group rounded-3xl border border-cyan-400/30 bg-white/10 backdrop-blur-xl p-10 scale-105 transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl hover:shadow-cyan-500/20"
+          >
+            <span
+              class="absolute -top-4 right-6 rounded-full bg-cyan-400 px-4 py-1 text-[10px] font-bold uppercase tracking-widest text-black"
+            >
+              Most Popular
+            </span>
+
+            <span class="text-xs tracking-widest uppercase text-cyan-400"
+              >Professional</span
+            >
+
+            <h3 class="text-5xl font-black text-white mt-4">
+              $9.8k <small class="text-base text-slate-500">/mo</small>
+            </h3>
+
+            <p class="text-slate-400 mt-4">
+              For scaling products and immersive game experiences.
+            </p>
+
+            <ul class="mt-8 space-y-3 text-slate-200 text-sm">
+              <li>Full Stack Platform</li>
+              <li>Unity 2D / 3D Game Dev</li>
+              <li>Multiplayer Backend</li>
+              <li>Admin Dashboard</li>
+              <li>Cloud + API Integration</li>
+              <li>Security & Optimization</li>
+              <li>Priority Support</li>
+            </ul>
+
+            <div class="flex justify-between text-xs text-slate-400 mt-8">
+              <span>⏱ 4–8 Weeks</span>
+              <span>👥 4 Engineers</span>
+            </div>
+
+            <button
+              class="mt-8 w-full rounded-xl bg-cyan-400 py-3 text-xs tracking-widest uppercase text-black font-semibold transition hover:opacity-90"
+            >
+              Launch Now
+            </button>
+          </div>
+
+          <!-- ENTERPRISE -->
+          <div
+            class="group rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-10 transition-all duration-500 hover:-translate-y-3 hover:shadow-xl hover:shadow-cyan-500/10"
+          >
+            <span class="text-xs tracking-widest uppercase text-slate-400"
+              >Enterprise</span
+            >
+
+            <h3 class="text-5xl font-black text-white mt-4">Custom</h3>
+
+            <p class="text-slate-400 mt-4">
+              Tailored for large-scale systems and AAA game projects.
+            </p>
+
+            <ul class="mt-8 space-y-3 text-slate-300 text-sm">
+              <li>Private Cloud Infrastructure</li>
+              <li>AAA Unity Game Systems</li>
+              <li>Dedicated Engineering Team</li>
+              <li>AI & Automation Integration</li>
+              <li>Scalable Architecture</li>
+              <li>On-Prem Deployment</li>
+              <li>24/7 Monitoring & Support</li>
+            </ul>
+
+            <div class="flex justify-between text-xs text-slate-500 mt-8">
+              <span>⏱ Custom</span>
+              <span>👥 Dedicated Squad</span>
+            </div>
+
+            <button
+              class="mt-8 w-full rounded-xl border border-white/15 py-3 text-xs tracking-widest uppercase text-white transition hover:bg-white hover:text-black"
+            >
+              Contact Us
+            </button>
+          </div>
+        </div>
+
+        <!-- Footer CTA -->
+        <div class="relative text-center mt-24">
+          <p class="text-slate-400 mb-6">
+            Need a custom solution for your startup, SaaS, or game studio?
+          </p>
+          <button
+            class="rounded-xl bg-cyan-400 px-10 py-4 text-sm font-bold text-black transition hover:opacity-90"
+          >
+            Talk to Yugmaaya Experts
+          </button>
+        </div>
+      </section>
+
+      <section class="reveal max-w-7xl mx-auto px-6 py-40">
+        <div
+          class="relative overflow-hidden rounded-[3rem] bg-white/5 backdrop-blur-2xl border border-white/10 p-12 lg:p-24 transition-all duration-500"
+        >
+          <!-- subtle light wash -->
+          <div
+            class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.05),transparent)]"
+          ></div>
+
+          <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-20">
+            <!-- LEFT CONTENT -->
+            <div>
+              <h2
+                class="text-4xl md:text-6xl font-semibold text-white mb-8 leading-tight"
+              >
+                Let’s Build Something
+                <span class="opacity-90">Exceptional</span>
+              </h2>
+
+              <p class="text-slate-400 text-lg mb-12 leading-relaxed max-w-xl">
+                Partner with YUGMAAYA to design, build, and scale secure digital
+                products with precision, clarity, and long-term reliability.
+              </p>
+
+              <!-- CONTACT -->
+              <div class="space-y-6">
+                <div class="flex items-center gap-5 group">
+                  <div
+                    class="size-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-white/30 transition-all duration-300"
+                  >
+                    <span class="material-symbols-outlined text-white text-lg">
+                      mail
+                    </span>
+                  </div>
+
+                  <div>
+                    <div
+                      class="text-xs uppercase tracking-widest text-slate-500"
+                    >
+                      Contact Email
+                    </div>
+                    <div class="text-base font-medium text-white">
+                      info@yugmaaya.com
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- FORM -->
+            <form class="space-y-6">
+              <input
+                type="text"
+                placeholder="Full Name"
+                class="w-full rounded-xl bg-white/5 backdrop-blur-xl border border-white/10 px-6 py-5 text-sm text-white placeholder:text-slate-500 focus:border-white/30 focus:outline-none transition"
+              />
+
+              <input
+                type="email"
+                placeholder="Email Address"
+                class="w-full rounded-xl bg-white/5 backdrop-blur-xl border border-white/10 px-6 py-5 text-sm text-white placeholder:text-slate-500 focus:border-white/30 focus:outline-none transition"
+              />
+
+              <textarea
+                rows="4"
+                placeholder="Tell us about your project"
+                class="w-full rounded-xl bg-white/5 backdrop-blur-xl border border-white/10 px-6 py-5 text-sm text-white placeholder:text-slate-500 focus:border-white/30 focus:outline-none transition resize-none"
+              ></textarea>
+
+              <button
+                type="submit"
+                class="w-full rounded-xl bg-white text-black py-5 text-xs font-medium uppercase tracking-[0.3em] hover:bg-slate-200 transition-all duration-300 hover:scale-[1.02]"
+              >
+                Get in Touch
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="relative py-6 bg-black border-y border-black/5 overflow-hidden"
+      >
+        <div class="text-center mb-6">
+          <h4
+            class="text-[10px] sm:text-[12px] font-mono font-bold tracking-[0.6em] text-slate-500 uppercase"
+          >
+            Powering the future with
+          </h4>
+        </div>
+
+        <div class="relative flex overflow-hidden group">
+          <div class="flex animate-marquee gap-12 whitespace-nowrap py-4">
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/java.png"
+                alt="Java"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >Java</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/android.png"
+                alt="Android"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >Android</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/ios.png"
+                alt="iOS"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >iOS</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/unity.png"
+                alt="Unity"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >Unity</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/unreal.png"
+                alt="Unreal Engine"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >Unreal</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/php.png"
+                alt="PHP"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >PHP</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/nodejs.png"
+                alt="Node.js"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >Node.js</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/nextjs.png"
+                alt="Next.js"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >Next.js</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/nestjs.png"
+                alt="Nest.js"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >Nest.js</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/aws.png"
+                alt="AWS"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >AWS</span
+              >
+            </div>
+
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/ai.png"
+                alt="AI"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >AI</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/python.png"
+                alt="Python"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >Python</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/csharp.png"
+                alt="C#"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >C#</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/cplusplus.png"
+                alt="C++"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >C++</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/react.png"
+                alt="React"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >React</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/mongo.png"
+                alt="MongoDB"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >MongoDB</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/postgres.png"
+                alt="Postgres"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >Postgres</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/mysql.png"
+                alt="MySQL"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >MySQL</span
+              >
+            </div>
+
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/java.png"
+                alt="Java"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >Java</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/android.png"
+                alt="Android"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >Android</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/ios.png"
+                alt="iOS"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >iOS</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/unity.png"
+                alt="Unity"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >Unity</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/unreal.png"
+                alt="Unreal Engine"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >Unreal</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/php.png"
+                alt="PHP"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >PHP</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/nodejs.png"
+                alt="Node.js"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >Node.js</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/nextjs.png"
+                alt="Next.js"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >Next.js</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/nestjs.png"
+                alt="Nest.js"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >Nest.js</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/aws.png"
+                alt="AWS"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >AWS</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/ai.png"
+                alt="AI"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >AI</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/python.png"
+                alt="Python"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >Python</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/csharp.png"
+                alt="C#"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >C#</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/cplusplus.png"
+                alt="C++"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >C++</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/react.png"
+                alt="React"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >React</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/mongo.png"
+                alt="MongoDB"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >MongoDB</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/postgres.png"
+                alt="Postgres"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >Postgres</span
+              >
+            </div>
+            <div
+              class="flex flex-col items-center justify-center gap-3 min-w-[100px]"
+            >
+              <img
+                src="/Assets/icons/mysql.png"
+                alt="MySQL"
+                class="w-12 h-12 object-contain"
+              />
+              <span
+                class="text-xs font-bold text-white uppercase tracking-tighter"
+                >MySQL</span
+              >
+            </div>
+          </div>
+
+          <div
+            class="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-slate-950 to-transparent"
+          ></div>
+          <div
+            class="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-slate-950 to-transparent"
+          ></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer
+      class="relative bg-black border-t border-white/10 pt-28 pb-16 overflow-hidden"
+    >
+      <!-- subtle glass overlay -->
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-white/5 via-transparent to-transparent"
+      ></div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-6">
+        <!-- TOP GRID -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-16 mb-24"
+        >
+          <!-- BRAND -->
+          <div class="lg:col-span-2">
+            <div class="flex items-center gap-3 mb-6">
+              <img
+                src="/Assets/images/Yugmaaya_logo.png"
+                alt="Yugmaaya"
+                class="h-10 w-auto"
+              />
+              <span class="text-xl font-semibold tracking-[0.2em] text-white">
+                YUGMAAYA
+              </span>
+            </div>
+
+            <p class="text-slate-400 text-sm leading-relaxed max-w-md">
+              We build modern, scalable, and secure software solutions
+              engineered for long-term growth and digital reliability.
+            </p>
+
+            <!-- SOCIAL -->
+            <div class="flex gap-4 mt-8 opacity-80">
+              <a href="#" class="hover:opacity-100 transition">
+                <img src="/Assets/icons/instagram.png" class="w-5 h-5" />
+              </a>
+              <a href="#" class="hover:opacity-100 transition">
+                <img src="/Assets/icons/communication.png" class="w-5 h-5" />
+              </a>
+              <a href="#" class="hover:opacity-100 transition">
+                <img src="/Assets/icons/youtube.png" class="w-5 h-5" />
+              </a>
+              <a href="#" class="hover:opacity-100 transition">
+                <img src="/Assets/icons/twitter.png" class="w-5 h-5" />
+              </a>
+            </div>
+          </div>
+
+          <!-- SERVICES -->
+          <div>
+            <h4
+              class="text-white text-xs font-semibold uppercase tracking-[0.3em] mb-6"
+            >
+              Services
+            </h4>
+            <ul class="space-y-4 text-sm text-slate-400">
+              <li>
+                <a href="#" class="hover:text-white transition">Planning</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition">Research</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition">Consulting</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition">Analysis</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition">User Testing</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- COMPANY -->
+          <div>
+            <h4
+              class="text-white text-xs font-semibold uppercase tracking-[0.3em] mb-6"
+            >
+              Company
+            </h4>
+            <ul class="space-y-4 text-sm text-slate-400">
+              <li>
+                <a href="#" class="hover:text-white transition">Who We Are</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition">Our Services</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition">Our Clients</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition">Pricing</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition">Contact Us</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- CONTACT / NEWSLETTER -->
+          <div>
+            <h4
+              class="text-white text-xs font-semibold uppercase tracking-[0.3em] mb-6"
+            >
+              Stay Updated
+            </h4>
+
+            <p class="text-sm text-slate-400 mb-4">
+              Subscribe for product updates and insights.
+            </p>
+
+            <input
+              type="email"
+              placeholder="Enter your email"
+              class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-white/30 backdrop-blur-xl mb-3"
+            />
+
+            <button
+              class="w-full rounded-xl bg-white/10 text-white text-sm py-3 hover:bg-white/20 transition backdrop-blur-xl"
+            >
+              Subscribe
+            </button>
+
+            <div class="mt-6 space-y-3 text-xs text-slate-500">
+              <div class="flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm text-slate-400">
+                  call
+                </span>
+                <span>
+                  +91 9634734388 <span class="opacity-50"> | </span> 9368822997
+                </span>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-sm text-slate-400">
+                  mail
+                </span>
+                <span> info@yugmaaya.com </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTTOM BAR -->
+        <div
+          class="border-t border-white/5 pt-10 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-slate-500"
+        >
+          <p class="uppercase tracking-widest">
+            © 2026 Yugmaaya. All rights reserved.
+          </p>
+
+          <div class="flex gap-8 uppercase tracking-widest">
+            <a href="#" class="hover:text-white transition">Privacy Policy</a>
+            <a href="#" class="hover:text-white transition">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting)
+              entry.target.classList.add("reveal-active");
+          });
+        },
+        { threshold: 0.1 },
+      );
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
+      const cursor = document.querySelector(".custom-cursor");
+      document.addEventListener("mousemove", (e) => {
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
+      });
+      document.querySelectorAll(".bento-glow-card").forEach((card) => {
+        card.addEventListener("mousemove", (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateX = (y - centerY) / 30;
+          const rotateY = (centerX - x) / 30;
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+        });
+        card.addEventListener("mouseleave", () => {
+          card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)`;
+        });
+      });
+
+      window.addEventListener("scroll", function () {
+        const header = document.getElementById("main-header");
+        if (window.scrollY > 50) {
+          header.classList.add("is-scrolled");
+        } else {
+          header.classList.remove("is-scrolled");
+        }
+      });
+    </script>
+
+    <script>
+      // Mobile menu toggle
+      const toggleButton = document.getElementById("mobile-menu-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      toggleButton.addEventListener("click", () => {
+        if (mobileMenu.classList.contains("max-h-0")) {
+          mobileMenu.classList.remove("max-h-0");
+          mobileMenu.classList.add("max-h-screen");
+        } else {
+          mobileMenu.classList.remove("max-h-screen");
+          mobileMenu.classList.add("max-h-0");
+        }
+      });
+
+      document.querySelectorAll(".service-card").forEach((card) => {
+        card.addEventListener("mousemove", (e) => {
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty("--x", `${e.clientX - rect.left}px`);
+          card.style.setProperty("--y", `${e.clientY - rect.top}px`);
+        });
+      });
+    </script>
+  </body>
+</html>
